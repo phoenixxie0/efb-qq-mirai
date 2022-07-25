@@ -20,7 +20,7 @@ RUN set -ex \
         && pip3 install python-telegram-bot[socks] \
         && apk del .build-deps \
         && rm -rf ~/.cache \
-        && wget https://raw.githubusercontent.com/phoenixxie0/efb-qq-docker/main/start.sh -O /start.sh \
+        && wget https://raw.githubusercontent.com/phoenixxie0/efb-qq-mirai/main/start.sh -O /start.sh \
         && chmod +x /start.sh 
         
 CMD ["/start.sh"]
