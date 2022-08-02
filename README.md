@@ -21,9 +21,9 @@
 # 一、下载efb-qq镜像
 登录ssh，输入下列代码
 ```
-docker pull phoenixxie/efb-qq-docker
+docker pull phoenixxie/efb-qq-mirai
 ```
-或者直接去群晖检索下载，url地址点击[这里](https://hub.docker.com/r/phoenixxie/efb-qq-docker)
+或者直接去群晖检索下载，url地址点击[这里](https://hub.docker.com/r/phoenixxie/efb-qq-mirai)
 ![image](https://user-images.githubusercontent.com/50565072/177001693-7642f1f1-9b61-436c-95ab-b7da799d816e.png)
 ![image](https://user-images.githubusercontent.com/50565072/177001698-e7714cde-c806-402e-9abb-50c6c7e7a935.png)
 
