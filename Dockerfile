@@ -1,4 +1,4 @@
-FROM python:3.8.13-alpine3.14
+FROM python:3.8.13-alpine3.16
 MAINTAINER Phoenix <hkxseven007@gmail.com>
 
 ENV LANG C.UTF-8
@@ -11,7 +11,7 @@ RUN set -ex \
         && echo "Asia/Shanghai" > /etc/timezone
 
 RUN set -ex \
-        && pip3 install --upgrade setuptools \
+        #&& pip3 install --upgrade setuptools \
         && pip3 install git+https://github.com/ehForwarderBot/ehForwarderBot \
         && pip3 install git+https://github.com/ehForwarderBot/efb-telegram-master \
         && pip3 install git+https://github.com/milkice233/efb-qq-slave \
