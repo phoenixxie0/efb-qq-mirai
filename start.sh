@@ -10,7 +10,7 @@ if [ ! -f "/root/mcl/mcl" ]; then
 fi
 
 cd /root/mcl 
-nohup ./mcl &>/dev/null &
+nohup ./mcl -u &>/dev/null &
 echo -e "mcl启动完成...\n"
 sleep 20
 ehforwarderbot &
