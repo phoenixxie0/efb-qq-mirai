@@ -18,7 +18,7 @@
 
 
 
-# 一、下载efb-qq镜像
+# 一、下载efb-qq-mirai镜像
 登录ssh，输入下列代码
 ```
 docker pull phoenixxie/efb-qq-mirai
@@ -65,7 +65,6 @@ chat - 生成会话头
 info - 显示当前 Telegram 聊天的信息
 unlink_all - 将所有远程会话从Telegram 群组解绑
 update_info - 更新当前群组名称和头像，和QQ同步
-extra - 获取更多功能
 rm - 撤回某条消息。和QQ的撤回时间是一样的，具体使用为回复要撤回的内容，发送 /rm
 extra - 掉线重新登录或强制刷新对话列表
 ```
@@ -91,12 +90,12 @@ extra - 掉线重新登录或强制刷新对话列表
 
 # 三、创建容器
 注：此处只讲群晖的安装方法，需要纯命令行的，请自行查阅资料依葫芦画瓢。
-## 1.在群晖创建一个目录efb-qq
-用于存放备份配置等数据，迁移重装的时候只需要备份整个efb-qq目录即可。
+## 1.在群晖创建一个目录efb-qq-mirai
+用于存放备份配置等数据，迁移重装的时候只需要备份整个efb-qq-mirai目录即可。
 目录结构如下
 
 ```
-efb-qq
+efb-qq-mirai
 ├── mcl
 └── profiles
     └── default
@@ -109,7 +108,7 @@ efb-qq
 
 具体配置内容见参考链接，本人贴出的仅供参考，每项代表什么也请自行查阅官方文档说明。
 
-/docker/efb-qq/profiles/default/milkice.qq/config.yaml
+/docker/efb-qq-mirai/profiles/default/milkice.qq/config.yaml
 
 ```
 Client: mirai
@@ -121,7 +120,7 @@ mirai:
 ```
 
 
-/docker/efb-qq/profiles/default/blueset.telegram/config.yaml
+/docker/efb-qq-mirai/profiles/default/blueset.telegram/config.yaml
 
 ```
 token: "00000000:AAAAAAAAAA" #引号内请替换为自己的bottoken
@@ -147,13 +146,13 @@ flags:
 ```
 
 
-/docker/efb-qq/profiles/default/config.yaml
+/docker/efb-qq-mirai/profiles/default/config.yaml
 
 中间件有不少，但需要的安装环境、文件、配置，请查询官方文档。目测QQ只有下面这一个可以用。本文也有部分举例描述，可以参考。
 ```
 master_channel: blueset.telegram
 slave_channels:
-- milkice.qq
+  - milkice.qq
 middlewares:     #新手小白待阅读完全文后再按需添加，否则启动会报错。
 #  - xzsk2.filter #根据自己的情况决定是否启用[使用参考]https://github.com/xzsk2/efb-filter-middleware
 ```
@@ -179,7 +178,7 @@ middlewares:     #新手小白待阅读完全文后再按需添加，否则启�
 
 再次重启docker，观察日志是否正常，文件夹是否产生，如果没有请再次重启。
 ## 2.填写mcl配置文件并启动
-填写并保存\docker\efb-qq\mcl\config\net.mamoe.mirai-api-http\settings.yml，具体说明查看[mirai客户端配置教程](https://github.com/ehForwarderBot/efb-qq-slave/blob/master/doc/Mirai_zh-CN.rst)。
+填写并保存\docker\efb-qq-mirai\mcl\config\net.mamoe.mirai-api-http\settings.yml，具体说明查看[mirai客户端配置教程](https://github.com/ehForwarderBot/efb-qq-slave/blob/master/doc/Mirai_zh-CN.rst)。
 
 ```
 adapters:
@@ -217,7 +216,7 @@ adapterSettings:
 打开ssh输入如下命令
 
 ```
-docker exec -it efb-qq ash
+docker exec -it efb-qq-mirai ash
 cd /root/mcl
 ./mcl -u
 ```
@@ -261,13 +260,13 @@ cd /root/mcl
 ###### （2）进行筛选分组
 在机器人对话界面操作：
 可以针对已经给你发送信息的账户，直接左滑回复，输入/link，发送，选择link，然后选择你创建好的群组即可。
-一个群组可以link多个微信账户，达到分组功能。
+一个群组可以link多个QQ账户，达到分组功能。
 
 ![image](https://user-images.githubusercontent.com/50565072/177025791-6439baa6-4e5f-4b00-afb4-97b9b30ed5cf.png)
 
 
 ###### （3）更新群组信息
-当你的群组只绑定了一个微信私聊或者群组时，可以在群组中输入/update_info，即可自动同步QQ头像、昵称、群组成员（在简介中）。这项功能需要给机器人管理员权限。
+当你的群组只绑定了一个QQ私聊或者群组时，可以在群组中输入/update_info，即可自动同步QQ头像、昵称、群组成员（在简介中）。这项功能需要给机器人管理员权限。
 ## 2.中间件设置
 本文只举例一个中间件，其余的还请自己查阅官方链接。不少中间件只是适用于微信，不适用于QQ。不需要启动的中间件直接在最前面加上#注释掉即可。
 ###### xzsk2.filter：信息过滤
