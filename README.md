@@ -65,7 +65,6 @@ chat - 生成会话头
 info - 显示当前 Telegram 聊天的信息
 unlink_all - 将所有远程会话从Telegram 群组解绑
 update_info - 更新当前群组名称和头像，和QQ同步
-extra - 获取更多功能
 rm - 撤回某条消息。和QQ的撤回时间是一样的，具体使用为回复要撤回的内容，发送 /rm
 extra - 掉线重新登录或强制刷新对话列表
 ```
@@ -91,12 +90,12 @@ extra - 掉线重新登录或强制刷新对话列表
 
 # 三、创建容器
 注：此处只讲群晖的安装方法，需要纯命令行的，请自行查阅资料依葫芦画瓢。
-## 1.在群晖创建一个目录efb-qq
-用于存放备份配置等数据，迁移重装的时候只需要备份整个efb-qq目录即可。
+## 1.在群晖创建一个目录efb-qq-mirai
+用于存放备份配置等数据，迁移重装的时候只需要备份整个efb-qq-mirai目录即可。
 目录结构如下
 
 ```
-efb-qq
+efb-qq-mirai
 ├── mcl
 └── profiles
     └── default
@@ -109,7 +108,7 @@ efb-qq
 
 具体配置内容见参考链接，本人贴出的仅供参考，每项代表什么也请自行查阅官方文档说明。
 
-/docker/efb-qq/profiles/default/milkice.qq/config.yaml
+/docker/efb-qq-mirai/profiles/default/milkice.qq/config.yaml
 
 ```
 Client: mirai
@@ -121,7 +120,7 @@ mirai:
 ```
 
 
-/docker/efb-qq/profiles/default/blueset.telegram/config.yaml
+/docker/efb-qq-mirai/profiles/default/blueset.telegram/config.yaml
 
 ```
 token: "00000000:AAAAAAAAAA" #引号内请替换为自己的bottoken
@@ -147,13 +146,13 @@ flags:
 ```
 
 
-/docker/efb-qq/profiles/default/config.yaml
+/docker/efb-qq-mirai/profiles/default/config.yaml
 
 中间件有不少，但需要的安装环境、文件、配置，请查询官方文档。目测QQ只有下面这一个可以用。本文也有部分举例描述，可以参考。
 ```
 master_channel: blueset.telegram
 slave_channels:
-- milkice.qq
+  - milkice.qq
 middlewares:     #新手小白待阅读完全文后再按需添加，否则启动会报错。
 #  - xzsk2.filter #根据自己的情况决定是否启用[使用参考]https://github.com/xzsk2/efb-filter-middleware
 ```
@@ -179,7 +178,7 @@ middlewares:     #新手小白待阅读完全文后再按需添加，否则启�
 
 再次重启docker，观察日志是否正常，文件夹是否产生，如果没有请再次重启。
 ## 2.填写mcl配置文件并启动
-填写并保存\docker\efb-qq\mcl\config\net.mamoe.mirai-api-http\settings.yml，具体说明查看[mirai客户端配置教程](https://github.com/ehForwarderBot/efb-qq-slave/blob/master/doc/Mirai_zh-CN.rst)。
+填写并保存\docker\efb-qq-mirai\mcl\config\net.mamoe.mirai-api-http\settings.yml，具体说明查看[mirai客户端配置教程](https://github.com/ehForwarderBot/efb-qq-slave/blob/master/doc/Mirai_zh-CN.rst)。
 
 ```
 adapters:
@@ -217,7 +216,7 @@ adapterSettings:
 打开ssh输入如下命令
 
 ```
-docker exec -it efb-qq ash
+docker exec -it efb-qq-mirai ash
 cd /root/mcl
 ./mcl -u
 ```
