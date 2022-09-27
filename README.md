@@ -18,7 +18,7 @@
 
 
 
-# 一、下载efb-qq镜像
+# 一、下载efb-qq-mirai镜像
 登录ssh，输入下列代码
 ```
 docker pull phoenixxie/efb-qq-mirai
